@@ -4,17 +4,30 @@
       <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
 
       <ul>
-      <% @project.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% @project.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
+  <div class='field'>
+    <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>
+
+  <h2>Applications</h2>
+  <%= f.fields_for :applications do |application| %>
+    <div class='project_application_fields'>
+      <div class='field'>
+        <%= application.label :name %><br />
+        <%= application.text_field :name %>
+        <%= application.check_box :_destroy %>
+        <%= application.label :_destroy, 'remove' %>
+      </div>
+    </div>
+  <% end %>
+
   <div class="actions">
     <%= f.submit %>
   </div>
