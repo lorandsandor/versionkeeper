@@ -20,8 +20,10 @@
   <%= f.fields_for :applications do |application| %>
     <div class='project_application_fields'>
       <div class='field'>
-        <%= application.label :name %><br />
+        <%= application.label :name %>
         <%= application.text_field :name %>
+        <%= application.label :source_control_uri %>
+        <%= application.text_field :source_control_uri %>
         <%= application.check_box :_destroy %>
         <%= application.label :_destroy, 'remove' %>
       </div>

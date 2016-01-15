@@ -71,6 +71,10 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:name, applications_attributes: [:id, :name, :_destroy])
+      params.require(:project).permit(:name,
+                                      applications_attributes: [:id,
+                                                                :name,
+                                                                :source_control_uri,
+                                                                :_destroy])
     end
 end
