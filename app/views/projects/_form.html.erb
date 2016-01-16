@@ -18,19 +18,14 @@
 
   <h2>Applications</h2>
   <%= f.fields_for :applications do |application| %>
-    <div class='project_application_fields'>
-      <div class='field'>
-        <%= application.label :name %>
-        <%= application.text_field :name %>
-        <%= application.label :source_control_uri %>
-        <%= application.text_field :source_control_uri %>
-        <%= application.check_box :_destroy %>
-        <%= application.label :_destroy, 'remove' %>
-      </div>
-    </div>
+    <%= render 'application_fields', f: application  %>
   <% end %>
 
-  <div class="actions">
-    <%= f.submit %>
+  <div class="links">
+    <%= link_to_add_association 'Add application', f, :applications, :class => "btn btn-default" %>
   </div>
+
+<div class="actions">
+  <%= f.submit %>
+</div>
 <% end %>

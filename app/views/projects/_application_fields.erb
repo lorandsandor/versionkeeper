@@ -1,0 +1,9 @@
+<div class='nested-fields'>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.label :source_control_uri %>
+  <%= f.text_field :source_control_uri %>
+  <%# <%= f.check_box :_destroy %>
+  <%# <%= f.label :_destroy, 'remove' %>
+  <%= link_to_remove_association "remove application", f, :class => "btn btn-default" %>
+</div>
