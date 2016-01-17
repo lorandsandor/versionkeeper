@@ -15,11 +15,10 @@ ActiveRecord::Schema.define(version: 20160115075543) do
 
   create_table "applications", force: :cascade do |t|
     t.string   "name"
-    t.string   "source_control_repo"
     t.string   "source_control_uri"
     t.integer  "project_id"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
   create_table "projects", force: :cascade do |t|
