@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe "releases/index", type: :view do
   before(:each) do
     assign(:releases, [
-      Release.create!(),
-      Release.create!()
+      Release.create!(date: Date.today),
+      Release.create!(date: Date.yesterday)
     ])
   end
 

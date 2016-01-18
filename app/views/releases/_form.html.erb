@@ -17,7 +17,6 @@
 
     <h2>Release Items</h2>
     <%= f.fields_for :release_items do |release_item| %>
-      <% @release.project
       <%= render 'release_item_fields', f: release_item, application: application %>
     <% end %>
   </div>

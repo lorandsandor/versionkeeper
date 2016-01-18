@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "releases/edit", type: :view do
   before(:each) do
-    @release = assign(:release, Release.create!())
+    @release = assign(:release, Release.create!(date: Date.today))
   end
 
   it "renders the edit release form" do
