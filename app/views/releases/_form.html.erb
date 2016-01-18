@@ -1,0 +1,28 @@
+<%= form_for(@release) do |f| %>
+  <% if @release.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@release.errors.count, "error") %> prohibited this release from being saved:</h2>
+
+      <ul>
+      <% @release.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :date %><br>
+    <%= f.date_select :date %>
+
+    <h2>Release Items</h2>
+    <%= f.fields_for :release_items do |release_item| %>
+      <%= render 'release_item_fields', f: release_item, application: application %>
+    <% end %>
+  </div>
+
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
