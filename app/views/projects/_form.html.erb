@@ -14,15 +14,14 @@
   <div class='field'>
     <%= f.label :name %><br />
     <%= f.text_field :name %>
-  </div>
 
-  <h2>Applications</h2>
-  <%= f.fields_for :applications do |application| %>
-    <%= render 'application_fields', f: application  %>
-  <% end %>
-
-  <div class="links">
-    <%= link_to_add_association 'Add application', f, :applications, :class => "btn btn-default" %>
+    <h2>Applications</h2>
+    <%= f.fields_for :applications do |application| %>
+      <%= render 'application_fields', f: application  %>
+    <% end %>
+    <div class="links">
+      <%= link_to_add_association 'Add application', f, :applications, :class => "btn btn-default" %>
+    </div>
   </div>
 
 <div class="actions">

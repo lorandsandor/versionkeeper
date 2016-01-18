@@ -15,10 +15,12 @@ class ReleasesController < ApplicationController
   # GET /releases/new
   def new
     @release = Release.new
+    @release.release_items.build
   end
 
   # GET /releases/1/edit
   def edit
+    @release.release_items.build
   end
 
   # POST /releases
@@ -69,6 +71,9 @@ class ReleasesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def release_params
-      params.require(:release).permit(:date)
+      params.require(:release).permit(:date,
+                                      release_item_attributes: [:id,
+                                                                :version,
+                                                                :_destroy])
     end
 end

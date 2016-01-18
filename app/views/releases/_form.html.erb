@@ -14,7 +14,15 @@
   <div class="field">
     <%= f.label :date %><br>
     <%= f.date_select :date %>
+
+    <h2>Release Items</h2>
+    <%= f.fields_for :release_items do |release_item| %>
+      <% @release.project
+      <%= render 'release_item_fields', f: release_item, application: application %>
+    <% end %>
   </div>
+
+
   <div class="actions">
     <%= f.submit %>
   </div>
