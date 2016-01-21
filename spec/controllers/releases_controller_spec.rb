@@ -31,6 +31,12 @@ RSpec.describe ReleasesController, type: :controller do
     { date: nil }
   }
 
+  let(:user) { create :user }
+
+  before do
+    sign_in user
+  end
+
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # ReleasesController. Be sure to keep this updated too.

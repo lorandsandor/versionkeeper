@@ -31,16 +31,19 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Dynamic nested forms using jQuery made easy; works with formtastic, simple_form or default forms http://github.com/nathanvda/cocoon
 gem "cocoon"
 
+# Devise for authentication
+gem 'devise'
+
 group :development, :test do
   gem 'pry-rails'
   gem 'rspec-rails'
   gem 'shoulda-matchers', '~> 3.0'
+  gem 'factory_girl_rails', require: false
 end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
-  
   gem 'better_errors'
   gem 'binding_of_caller'
 
@@ -48,4 +51,8 @@ group :development do
   gem 'spring'
 end
 
-gem 'simplecov', :require => false, :group => :test
+gem 'simplecov', require: false, group: :test
+gem 'capybara', group: :test
+
+gem 'omniauth'
+gem 'omniauth-github'
