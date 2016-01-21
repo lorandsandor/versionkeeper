@@ -2,9 +2,20 @@ require 'rails_helper'
 
 RSpec.describe "Releases", type: :request do
   describe "GET /releases" do
-    it "works! (now write some real specs)" do
-      get releases_path
-      expect(response).to have_http_status(200)
+    context 'when user not logged in' do
+      it 'redirects to login page' do
+        get releases_path
+        expect(response).to have_http_status(302)
+      end
+    end
+
+    context 'when user logged in' do
+      let(:user) { create :user }
+      it 'does not redirect to login page' do
+        post_via_redirect user_session_path, 'user[email]' => user.email, 'user[password]' => user.password
+        get releases_path
+        expect(response).to have_http_status(200)
+      end
     end
   end
 end
