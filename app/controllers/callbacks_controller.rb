@@ -10,7 +10,7 @@ class CallbacksController < Devise::OmniauthCallbacksController
       auth_params = request.env["omniauth.auth"]
       provider = AuthenticationProvider.where(name: auth_params.provider).first
       authentication = provider.user_authentications.where(uid: auth_params.uid).first
-      existing_user = current_user || User.where('email = ?', auth_params['info']['email']).first
+      existing_user = current_user || (authentication.nil? ? nil : User.where(id: authentication.user_id).first)
 
       if authentication
         sign_in_with_existing_authentication(authentication)
