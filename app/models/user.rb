@@ -3,6 +3,13 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
      :omniauthable, :omniauth_providers => [:github]
 
+  has_many :authentications, class_name: UserAuthentication, dependent: :destroy
+  has_many :project_memberships
+  has_many :projects,
+    -> { uniq },
+    :through => :project_memberships,
+    :class_name => '::Project'
+
   def self.create_from_omniauth(auth)
       where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
         user.provider = auth.provider
