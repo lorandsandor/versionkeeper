@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable,
+         :recoverable, :trackable, :validatable,
      :omniauthable, :omniauth_providers => [:github]
 
   has_many :authentications, class_name: UserAuthentication, dependent: :destroy
