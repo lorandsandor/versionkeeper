@@ -31,6 +31,8 @@ RSpec.describe ReleasesController, type: :controller do
     { date: nil }
   }
 
+  let(:release) { Release.create! valid_attributes }
+
   let(:user) { create :user }
 
   before do
@@ -45,7 +47,7 @@ RSpec.describe ReleasesController, type: :controller do
   describe "GET #index" do
     it "assigns all releases as @releases" do
       release = Release.create! valid_attributes
-      get :index, {}, valid_session
+      get :index, params: {}, session: valid_session
       expect(assigns(:releases)).to eq([release])
     end
   end
@@ -53,14 +55,14 @@ RSpec.describe ReleasesController, type: :controller do
   describe "GET #show" do
     it "assigns the requested release as @release" do
       release = Release.create! valid_attributes
-      get :show, {:id => release.to_param}, valid_session
+      get :show, params: { :id => release.to_param }, session: valid_session
       expect(assigns(:release)).to eq(release)
     end
   end
 
   describe "GET #new" do
     it "assigns a new release as @release" do
-      get :new, {}, valid_session
+      get :new, params: {}, session: valid_session
       expect(assigns(:release)).to be_a_new(Release)
     end
   end
@@ -68,98 +70,68 @@ RSpec.describe ReleasesController, type: :controller do
   describe "GET #edit" do
     it "assigns the requested release as @release" do
       release = Release.create! valid_attributes
-      get :edit, {:id => release.to_param}, valid_session
+      get :edit, params: { :id => release.to_param }, session: valid_session
       expect(assigns(:release)).to eq(release)
     end
   end
 
   describe "POST #create" do
     context "with valid params" do
-      it "creates a new Release" do
+      specify do
         expect {
-          post :create, {:release => valid_attributes}, valid_session
+          post :create, params: { :release => valid_attributes }, session: valid_session
         }.to change(Release, :count).by(1)
-      end
 
-      it "assigns a newly created release as @release" do
-        post :create, {:release => valid_attributes}, valid_session
         expect(assigns(:release)).to be_a(Release)
         expect(assigns(:release)).to be_persisted
-      end
-
-      it "redirects to the created release" do
-        post :create, {:release => valid_attributes}, valid_session
         expect(response).to redirect_to(Release.last)
       end
     end
 
     context "with invalid params" do
-      it "assigns a newly created but unsaved release as @release" do
-        post :create, {:release => invalid_attributes}, valid_session
-        expect(assigns(:release)).to be_a_new(Release)
-      end
+      specify do
+        post :create, params: { :release => invalid_attributes }, session: valid_session
 
-      it "re-renders the 'new' template" do
-        post :create, {:release => invalid_attributes}, valid_session
+        expect(assigns(:release)).to be_a_new(Release)
         expect(response).to render_template("new")
       end
     end
   end
 
   describe "PUT #update" do
+
     context "with valid params" do
       let(:new_attributes) {
         { date: Date.yesterday }
       }
 
-      it "updates the requested release" do
-        release = Release.create! valid_attributes
-        put :update, {:id => release.to_param, :release => new_attributes}, valid_session
+      specify do
+        put :update, params: { :id => release.to_param, :release => new_attributes }, session: valid_session
         release.reload
+
         expect(release.date).to eq new_attributes[:date]
-      end
-
-      it "assigns the requested release as @release" do
-        release = Release.create! valid_attributes
-        put :update, {:id => release.to_param, :release => valid_attributes}, valid_session
         expect(assigns(:release)).to eq(release)
-      end
-
-      it "redirects to the release" do
-        release = Release.create! valid_attributes
-        put :update, {:id => release.to_param, :release => valid_attributes}, valid_session
         expect(response).to redirect_to(release)
       end
     end
 
     context "with invalid params" do
-      it "assigns the release as @release" do
-        release = Release.create! valid_attributes
-        put :update, {:id => release.to_param, :release => invalid_attributes}, valid_session
+      specify do
+        put :update, params: { :id => release.to_param, :release => invalid_attributes }, session: valid_session
         expect(assigns(:release)).to eq(release)
-      end
-
-      it "re-renders the 'edit' template" do
-        release = Release.create! valid_attributes
-        put :update, {:id => release.to_param, :release => invalid_attributes}, valid_session
         expect(response).to render_template("edit")
       end
     end
   end
 
   describe "DELETE #destroy" do
-    it "destroys the requested release" do
-      release = Release.create! valid_attributes
+    specify do
+      release.reload
       expect {
-        delete :destroy, {:id => release.to_param}, valid_session
+        delete :destroy, params: { :id => release.to_param }, session: valid_session
       }.to change(Release, :count).by(-1)
-    end
 
-    it "redirects to the releases list" do
-      release = Release.create! valid_attributes
-      delete :destroy, {:id => release.to_param}, valid_session
       expect(response).to redirect_to(releases_url)
     end
   end
-
 end

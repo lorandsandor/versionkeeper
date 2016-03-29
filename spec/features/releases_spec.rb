@@ -23,7 +23,7 @@ RSpec.describe "Releases", type: :feature do
 
         visit releases_path
 
-        expect(page).to have_http_status 200
+        expect(page.status_code).to eq 200
         expect(page).to have_content 'Releases'
       end
     end

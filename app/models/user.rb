@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   has_many :authentications, class_name: UserAuthentication, dependent: :destroy
   has_many :project_memberships
   has_many :projects,
-    -> { uniq },
+    -> { distinct },
     :through => :project_memberships,
     :class_name => 'Project'
 
