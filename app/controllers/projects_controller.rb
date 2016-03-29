@@ -15,12 +15,12 @@ class ProjectsController < ApplicationController
   # GET /projects/new
   def new
     @project = current_user.projects.new
-    @project.applications.build
+    @project.repositories.build
   end
 
   # GET /projects/1/edit
   def edit
-    @project.applications.build
+    @project.repositories.build
   end
 
   # POST /projects
@@ -73,7 +73,7 @@ class ProjectsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
       params.require(:project).permit(:name,
-                                      applications_attributes: [:id,
+                                      repositories_attributes: [:id,
                                                                 :name,
                                                                 :source_control_uri,
                                                                 :_destroy])
