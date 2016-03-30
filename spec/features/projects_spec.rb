@@ -23,7 +23,7 @@ RSpec.describe "Projects", type: :feature do
 
         visit projects_path
 
-        expect(page).to have_http_status 200
+        expect(page.status_code).to eq 200
         expect(page).to have_content 'Projects'
       end
     end

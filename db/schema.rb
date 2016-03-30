@@ -13,14 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20160204210903) do
 
-  create_table "applications", force: :cascade do |t|
-    t.string   "name"
-    t.string   "source_control_uri"
-    t.integer  "project_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-  end
-
   create_table "authentication_providers", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -44,10 +36,10 @@ ActiveRecord::Schema.define(version: 20160204210903) do
 
   create_table "release_items", force: :cascade do |t|
     t.integer  "release_id"
-    t.integer  "application_id"
+    t.integer  "repository_id"
     t.string   "version"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "releases", force: :cascade do |t|
@@ -55,6 +47,14 @@ ActiveRecord::Schema.define(version: 20160204210903) do
     t.date     "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "repositories", force: :cascade do |t|
+    t.string   "name"
+    t.string   "source_control_uri"
+    t.integer  "project_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
   create_table "user_authentications", force: :cascade do |t|

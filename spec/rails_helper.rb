@@ -52,11 +52,17 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
 
   # Filter lines from Rails gems in backtraces.
-  config.filter_rails_from_backtrace!
+  config.filter_gems_from_backtrace
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 
   config.include Capybara::DSL
+
+  [:controller, :view, :request].each do |type|
+    config.include ::Rails::Controller::Testing::TestProcess, :type => type
+    config.include ::Rails::Controller::Testing::TemplateAssertions, :type => type
+    config.include ::Rails::Controller::Testing::Integration, :type => type
+  end
 end
 
 Shoulda::Matchers.configure do |config|

@@ -6,6 +6,7 @@ class CallbacksController < Devise::OmniauthCallbacksController
 
   private
 
+  # :nocov:
     def create
       auth_params = request.env["omniauth.auth"]
       provider = AuthenticationProvider.where(name: auth_params.provider).first
@@ -40,4 +41,5 @@ class CallbacksController < Devise::OmniauthCallbacksController
         redirect_to new_user_registration_url
       end
     end
+  # :nocov:
 end
