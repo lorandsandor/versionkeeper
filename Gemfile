@@ -38,6 +38,9 @@ gem 'omniauth-github'
 
 group :development, :test do
   gem 'pry-rails'
+  %w[rspec-core rspec-expectations rspec-mocks rspec-rails rspec-support].each do |lib|
+    gem lib, :git => "https://github.com/rspec/#{lib}.git", :branch => 'master'
+  end
 end
 
 group :development do
@@ -49,7 +52,6 @@ end
 group :test do
   gem 'simplecov', require: false
   gem 'capybara'
-  gem 'rspec-rails'
   gem 'shoulda-matchers', '~> 3.0'
   gem 'factory_girl_rails', require: false
   gem 'rails-controller-testing'
